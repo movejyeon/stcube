@@ -63,6 +63,7 @@ header.on {
 
 /* header_center */
 .header_center {
+  width: 100%;
   height: 100%;
 }
 nav {
@@ -71,12 +72,12 @@ nav {
 .gnb {
   display: flex;
   justify-content: center;
-  gap: 6rem;
   height: 100%;
-  margin-left: -4rem;
 }
 .gnb > li {
+  padding: 0 50px;
   height: 100%;
+  text-align: center;
 }
 .gnb > li > a {
   color: #fff;
@@ -100,26 +101,30 @@ header.on .gnb > li > a {
 }
 .snb {
   /* background-color: orange; */
+  width: 100%;
   height: 0;
+  line-height: 95px;
   overflow: hidden;
   display: flex;
   justify-content: center;
   position: absolute;
   left: 50%;
-  top: calc(150% - 12.5px);
+  top: 100%;
+  /* top:150%; */
   z-index: 5;
   transform: translate(-50%, -50%);
 }
 .snb.on {
-  height: 25px;
-  line-height: 25px;
+  height: 100%;
   top: 150%;
   transition: 0.3s;
 }
 .snb li {
+  height: 100%;
   padding: 0 2.5rem;
 }
 .snb li > a {
+  /* display: inline; */
   font-size: 1.15rem;
 }
 .snb li:not(:last-child) {
@@ -140,15 +145,17 @@ header.on .gnb > li > a {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 1.5rem;
+  gap: 1rem;
 }
 .lang {
   position: relative;
   cursor: pointer;
 }
 .lang p {
+  width: 60px;
   font-size: 0.8rem;
-  padding: 0.6rem 1rem;
+  text-align: center;
+  padding: 0.6rem 0;
   border-radius: 5rem;
 }
 .lang > p {
@@ -168,6 +175,10 @@ header.on .lang > p i {
   height: 8px;
   background: url(../img/lang_arr.png) no-repeat center / contain;
   transform: translateY(-5%);
+  transition: 0.3s;
+}
+.lang.on i {
+  transform: translateY(-5%) rotate(-180deg);
 }
 .lang_drop {
   position: absolute;
@@ -393,7 +404,12 @@ header.on .menu_bar span {
 .con1_title p span {
   display: inline-block;
   transform: translateY(100%);
-  transition: 0.5s;
+  opacity: 0;
+  transition: 0.5s ease-in;
+}
+.con1_title p.on span {
+  opacity: 1;
+  transform: translateY(0);
 }
 .con1 ul {
   width: 90%;
@@ -447,6 +463,7 @@ header.on .menu_bar span {
 }
 
 /* con2 */
+
 .con_title {
   width: 80%;
   margin: 0 auto;
@@ -454,12 +471,28 @@ header.on .menu_bar span {
   justify-content: space-between;
   align-items: center;
 }
+.con2_title {
+  opacity: 0;
+  transform: translateY(20%);
+}
+.con2_title.on {
+  opacity: 1;
+  transform: translateY(0);
+  transition: 0.5s;
+}
 .flow {
   font-size: 5.5rem;
   font-weight: bold;
 }
 .flow span {
   letter-spacing: -1rem;
+  opacity: 0;
+  transform: translateY(100%) !important;
+}
+.con2 .flow span.on {
+  opacity: 1;
+  transform: translateY(0);
+  transition: 0.5s;
 }
 .con_title_sub {
   font-size: 1.2rem;
@@ -518,6 +551,12 @@ header.on .menu_bar span {
   overflow: hidden;
   border-radius: 6rem 1rem 6rem 1rem;
   height: 500px;
+  transform: scale(0);
+  transition: 1s;
+  transition-delay: 0.3s;
+}
+.con2_content li.on .con2_img {
+  transform: scale(1);
 }
 .con2_img img {
   width: 100%;
@@ -526,6 +565,12 @@ header.on .menu_bar span {
 }
 .con2_txt {
   width: 42%;
+  opacity: 0;
+  transition: 0.5s;
+  /* margin-left: -15%; */
+}
+.con2_content li.on .con2_txt {
+  opacity: 1;
   margin-left: 8%;
 }
 .part {
@@ -548,6 +593,20 @@ header.on .menu_bar span {
 .con3_title .flow span:nth-of-type(3) {
   margin-right: 1.5rem;
 }
+.con3_title {
+  opacity: 0;
+  transform: translateY(20%);
+}
+.con3_title.on {
+  opacity: 1;
+  transform: translateY(0);
+  transition: 0.5s;
+}
+.con3 .flow span.on {
+  opacity: 1;
+  transform: translateY(0);
+  transition: 0.5s;
+}
 .con3_content {
   width: 90%;
   margin: 6rem auto;
@@ -568,6 +627,12 @@ header.on .menu_bar span {
   font-size: 1.8rem;
   font-weight: bold;
   padding: 2rem;
+  opacity: 0;
+  transition: 0.5s;
+}
+.con3_content.on li:nth-of-type(1) {
+  opacity: 1;
+  transition-delay: 0.5s;
 }
 .con3_content li:nth-of-type(2) {
   border-radius: 100px 15px 15px 15px;
@@ -583,13 +648,46 @@ header.on .menu_bar span {
   font-size: 1.65rem;
   font-weight: bold;
 }
+.con3_left {
+  transform: translateX(-80%);
+  opacity: 0;
+  transition: 1s;
+}
+.con3_right {
+  transform: translateX(80%);
+  opacity: 0;
+  transition: 1s;
+}
+.con3_content.on .con3_left,
+.con3_content.on .con3_right {
+  transform: translateX(0%);
+  opacity: 1;
+}
 
+/* con4 */
+.con4 {
+  margin: 15rem auto 15rem;
+}
+.con4_title {
+  transform: translateY(20%);
+  opacity: 0;
+}
+.con4_title.on {
+  transform: translateY(0);
+  opacity: 1;
+  transition: 0.5s;
+}
+.con4 .flow span.on {
+  opacity: 1;
+  transform: translateY(0);
+  transition: 0.5s;
+}
 /* 스와이퍼 css */
 .swiper {
   width: 90%;
 }
 .swiper-wrapper {
-  width: 150% !important;
+  width: 150%;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -604,4 +702,33 @@ header.on .menu_bar span {
   width: 100%;
   height: 100%;
   /* object-fit: contain; */
+}
+/* .swiper_txt{
+  background-color: #eee;
+} */
+
+/* footer */
+footer {
+  padding: 1rem;
+}
+.footer_inner {
+  background-color: #000;
+  padding: 3.5rem 5rem;
+  border-radius: 1rem;
+}
+.footer_inner ul {
+  display: flex;
+  justify-content: space-between;
+}
+.footer_inner ul li {
+  color: #fff;
+}
+.footer_inner ul li p:nth-of-type(1) {
+  margin-bottom: 1rem;
+}
+.footer_inner img {
+  width: auto;
+}
+.top {
+  display: none;
 }

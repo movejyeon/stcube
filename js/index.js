@@ -48,10 +48,17 @@ $(function () {
     $(".gnb li").find(".snb").removeClass("on");
   });
 
+  // lang
+  $(".lang").on("click", function () {
+    $(".lang").toggleClass("on");
+    $(".lang_drop").stop().slideToggle(200);
+  });
+
   // 스크롤 이벤트
   $(window).on("scroll", function () {
     let sr = $(this).scrollTop();
 
+    // header 스크롤
     if (sr > 0) {
       $(".logo_c").css({ display: "block" });
       $(".logo_w").css({ display: "none" });
@@ -60,6 +67,60 @@ $(function () {
       $(".logo_c").css({ display: "none" });
       $(".logo_w").css({ display: "block" });
       $("header").removeClass("on");
+    }
+
+    // con1 스크롤
+    let con1 = $(".con1").offset().top;
+    if (sr >= con1 - 300) {
+      for (let i = 0; i < $(".con1_title p").length; i++) {
+        setTimeout(function () {
+          $(".con1_title p").eq(i).addClass("on");
+        }, i * 200);
+      }
+      $(".con1_img").addClass("on");
+    }
+
+    // con2 스크롤
+    let con2 = $(".con2").offset().top;
+    if (sr >= con2 - 500) {
+      $(".con2_title").addClass("on");
+      for (let i = 0; i < $(".con2 .flow span").length; i++) {
+        setTimeout(function () {
+          $(".con2 .flow span").eq(i).addClass("on");
+        }, i * 100);
+      }
+    }
+
+    for (let i = 0; i < $(".con2_content li").length; i++) {
+      if (sr >= $(".con2_content li").eq(i).offset().top - 500) {
+        $(".con2_content li").eq(i).addClass("on");
+      }
+    }
+
+    // con3 스크롤
+    let con3 = $(".con3").offset().top;
+    if (sr >= con3 - 500) {
+      $(".con3_title").addClass("on");
+      for (let i = 0; i < $(".con3 .flow span").length; i++) {
+        setTimeout(function () {
+          $(".con3 .flow span").eq(i).addClass("on");
+        }, i * 100);
+      }
+
+      $(".con3_content").addClass("on");
+    }
+
+    // con4 스크롤
+    let con4 = $(".con4").offset().top;
+
+    if (sr >= con4 - 500) {
+      $(".con4_title").addClass("on");
+    }
+
+    for (let i = 0; i < $(".con4 .flow span").length; i++) {
+      setTimeout(function () {
+        $(".con4 .flow span").eq(i).addClass("on");
+      }, i * 100);
     }
   });
 
@@ -114,6 +175,17 @@ $(function () {
   $(".prev").on("click", function () {
     clearInterval(start);
     prev();
+    start = setInterval(next, 5000);
+  });
+
+  $(".circle span").on("click", function () {
+    let i = $(this).index();
+
+    clearInterval(start);
+    $(".visual_img").removeClass("on");
+    $(".visual_img").eq(i).addClass("on");
+    $(".circle span").removeClass("on");
+    $(".circle span").eq(i).addClass("on");
     start = setInterval(next, 5000);
   });
 
