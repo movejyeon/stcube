@@ -1,54 +1,28 @@
 $(function () {
   // header 애니메이션
-  $(".header_center").on("mouseenter", function () {
-    $(".logo_c").css({ display: "block" });
-    $(".logo_w").css({ display: "none" });
-
+  $(".pc_nav > ul > li").on("mouseenter", function () {
     $("header").addClass("on");
-    $(".h_center_bg").stop().slideDown();
+    $("header").addClass("hover");
+
+    $(".header_bg").stop().slideDown(250);
+    $(this).find(".sub").stop().slideDown(180);
+    $(".pc_nav > ul > li").addClass("on");
+    $(this).addClass("hover");
   });
 
-  // header 애니메이션 지움
-  $(".header_center").on("mouseleave", function () {
-    let has = $("header").hasClass("on");
-
-    if (has) {
-      $(".logo_c").css({ display: "block" });
-      $(".logo_w").css({ display: "none" });
-      $("header").addClass("on");
-    } else {
-      $(".logo_c").css({ display: "none" });
-      $(".logo_w").css({ display: "block" });
+  //   leave
+  $(".pc_nav > ul > li").on("mouseleave", function () {
+    if ($(window).scrollTop() == 0) {
       $("header").removeClass("on");
+      $("header").removeClass("hover");
     }
 
-    $(".h_center_bg").stop().slideUp();
+    $(".header_bg").stop().slideUp(200);
+    $(this).find(".sub").stop().slideUp(0);
+    $(this).removeClass("hover");
   });
 
-  // gnb hover시 snb 나옴
-  $(".gnb li").on("mouseenter", function () {
-    // let el = $(this);
-    $(".gnb li").find(".snb").removeClass("on");
-
-    // setTimeout(function () {
-    //   $(el).find(".snb").addClass("on");
-    // }, 300);
-
-    // setTimeout에서는 this는 이벤트 당사자가 아닌 window를 가리키게 됨, 따라서 원하는 객체에 효과가 들어가지 않음. 따라서 this를 변수에 저장해서 사용하자.
-
-    setTimeout(() => {
-      $(this).find(".snb").addClass("on");
-    }, 100);
-
-    // 화살표함수로 쓰면 this의 객체가 변하지 않음.
-  });
-
-  // gnb snb 지움
-  $(".gnb li").on("mouseleave", function () {
-    $(".gnb li").find(".snb").removeClass("on");
-  });
-
-  // lang
+  //   lang
   $(".lang").on("click", function () {
     $(".lang").toggleClass("on");
     $(".lang_drop").stop().slideToggle(200);
@@ -60,13 +34,16 @@ $(function () {
 
     // header 스크롤
     if (sr > 0) {
-      $(".logo_c").css({ display: "block" });
-      $(".logo_w").css({ display: "none" });
+      $("header").addClass("hover");
       $("header").addClass("on");
     } else {
-      $(".logo_c").css({ display: "none" });
-      $(".logo_w").css({ display: "block" });
-      $("header").removeClass("on");
+      if ($(".pc_nav > ul > li").hasClass("hover") == true) {
+        $("header").addClass("hover");
+        $("header").addClass("on");
+      } else {
+        $("header").removeClass("hover");
+        $("header").removeClass("on");
+      }
     }
 
     // con1 스크롤
@@ -115,6 +92,12 @@ $(function () {
 
     if (sr >= con4 - 500) {
       $(".con4_title").addClass("on");
+
+      for (let i = 0; i < $(".swiper-wrapper .swiper-slide").length; i++) {
+        setTimeout(function () {
+          $(".swiper-wrapper .swiper-slide").eq(i).addClass("on");
+        }, i * 150);
+      }
     }
 
     for (let i = 0; i < $(".con4 .flow span").length; i++) {
@@ -191,9 +174,14 @@ $(function () {
 
   // 스와이퍼
   var swiper = new Swiper(".mySwiper", {
+    slidesPerView: 4,
+    spaceBetween: 40,
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+    },
     scrollbar: {
       el: ".swiper-scrollbar",
-      hide: true,
     },
   });
 });

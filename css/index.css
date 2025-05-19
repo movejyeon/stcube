@@ -28,6 +28,8 @@ body {
 header {
   width: 100%;
   position: fixed;
+  left: 0;
+  top: 0;
   z-index: 5;
   transition: 0.5s;
 }
@@ -35,12 +37,12 @@ header.on {
   background-color: #fff;
 }
 .header_inner {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   width: 92%;
   height: 95px;
   margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 /* header_left */
@@ -60,77 +62,74 @@ header.on {
 .header_left .logo_c a {
   background-image: url(../img/stc_logo.png);
 }
+header.on .logo_w {
+  display: none;
+}
+header.on .logo_c {
+  display: block;
+}
 
-/* header_center */
-.header_center {
+/* header_middle */
+.header_middle {
   width: 100%;
-  height: 100%;
+  margin-left: -50px;
 }
-nav {
-  height: 100%;
-}
-.gnb {
+.pc_nav > ul {
   display: flex;
   justify-content: center;
-  height: 100%;
+  align-items: center;
 }
-.gnb > li {
-  padding: 0 50px;
-  height: 100%;
+.pc_nav > ul > li {
+  margin: 0 50px;
   text-align: center;
-}
-.gnb > li > a {
-  color: #fff;
-  position: relative;
-  height: 100%;
-  line-height: 95px;
   font-size: 1.15rem;
 }
-/* .gnb > li > a::after {
+.pc_nav > ul > li.on {
+  margin: 0;
+  padding: 0 50px;
+}
+.pc_nav > ul > li > a {
+  color: #fff;
+  line-height: 95px;
+  position: relative;
+}
+header.hover .pc_nav > ul > li > a {
+  color: #222;
+}
+.pc_nav > ul > li.hover > a:after {
   content: "";
   display: inline-block;
   width: 100%;
-  height: 1px;
+  height: 2px;
   background-color: #222;
   position: absolute;
   left: 0;
-  bottom: 0;
-} */
-header.on .gnb > li > a {
-  color: #222;
+  top: 65%;
 }
-.snb {
-  /* background-color: orange; */
+.sub {
   width: 100%;
-  height: 0;
-  line-height: 95px;
-  overflow: hidden;
+  position: absolute;
+  left: 0;
+  top: 100%;
+  display: none;
+}
+.sub ul {
+  width: 100%;
+  height: 95px;
   display: flex;
   justify-content: center;
-  position: absolute;
-  left: 50%;
-  top: 100%;
-  /* top:150%; */
-  z-index: 5;
-  transform: translate(-50%, -50%);
+  align-items: center;
 }
-.snb.on {
-  height: 100%;
-  top: 150%;
-  transition: 0.3s;
+.sub ul li {
+  padding: 0 35px;
 }
-.snb li {
-  height: 100%;
-  padding: 0 2.5rem;
-}
-.snb li > a {
-  /* display: inline; */
-  font-size: 1.15rem;
-}
-.snb li:not(:last-child) {
+.sub ul li:not(:last-child) {
   border-right: 1px solid #ccc;
 }
-.h_center_bg {
+.sub ul li a:hover {
+  color: orange;
+}
+.header_bg {
   width: 100%;
   height: 95px;
   position: absolute;
@@ -138,6 +137,7 @@ header.on .gnb > li > a {
   top: 100%;
   background-color: #eee;
   display: none;
+  z-index: -1;
 }
 
 /* header_right */
@@ -162,11 +162,11 @@ header.on .gnb > li > a {
   border: 1px solid #fff;
   color: #fff;
 }
-header.on .lang > p {
+header.hover .lang > p {
   color: #222;
   border: 1px solid #222;
 }
-header.on .lang > p i {
+header.hover .lang > p i {
   filter: invert();
 }
 .lang > p i {
@@ -210,7 +210,7 @@ header.on .lang > p i {
   position: absolute;
   left: 0;
 }
-header.on .menu_bar span {
+header.hover .menu_bar span {
   background-color: #222;
 }
 .menu_bar span:nth-of-type(1) {
@@ -682,30 +682,48 @@ header.on .menu_bar span {
   transform: translateY(0);
   transition: 0.5s;
 }
+
 /* 스와이퍼 css */
 .swiper {
   width: 90%;
+  height: 100%;
 }
-.swiper-wrapper {
-  width: 150%;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
+.swiper-wrapper .swiper-slide {
+  margin-bottom: 3rem;
+  transform: translateY(150px);
+  opacity: 0;
+  transition: 0.5s;
 }
-
-.swiper-slide {
-  width: calc(100% / 6) !important;
+.swiper-wrapper .swiper-slide.on {
+  opacity: 1;
+  transform: translateY(0);
 }
-
+.swiper-slide:not(:nth-of-type(2), :nth-of-type(3)) .s_title {
+  margin-bottom: 4.5rem;
+}
+.swiper_img {
+  width: 100%;
+  height: 225px;
+  overflow: hidden;
+}
 .swiper_img img {
   display: block;
   width: 100%;
   height: 100%;
-  /* object-fit: contain; */
+  object-fit: contain;
 }
-/* .swiper_txt{
-  background-color: #eee;
-} */
+.swiper_txt {
+  background-color: #f9f9f9;
+  padding: 30px;
+}
+.s_title {
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+.date {
+  margin-top: 1rem;
+}
 
 /* footer */
 footer {
